@@ -5,10 +5,15 @@ from PIL import Image
 import numpy as np
 import io
 import keras
+from gevent.pywsgi import WSGIServer
+
+import tensorflow as tf
+
+
+xray_model = keras.models.load_model('model.model')
+
 
 app = Flask(__name__)
-
-model = keras.models.load_model('model.model')
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -33,18 +38,15 @@ def predict():
 
             # classify the input image and then initialize the list
             # of predictions to return to the client
-            model = keras.models.load_model('model.model')
-            
-            preds = model.predict(image_)
+            # model = keras.models.load_model('model.model')
+            preds = xray_model.predict(image_)
             data["success"] = True
-            data["predictions"] = str(preds)
+            data["predictions"] = preds.tolist()[0]
 
     # return the data dictionary as a JSON response
     return flask.jsonify(data)
 
 
-if __name__ == "__main__":
-    print(("* Loading Keras model and Flask starting server..."
-        "please wait until server has fully started"))
-    load_model()
-    app.run()
+if __name__ == '__main__':
+    http_server = WSGIServer(('0.0.0.0', 5010), app)
+    http_server.serve_forever()
