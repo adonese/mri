@@ -3,17 +3,9 @@ import numpy as np
 from skimage import transform
 
 
-def prepare_image(image, target):
-    # if the image mode is not RGB, convert it
-    if image.mode != "RGB":
-        image = image.convert("RGB")
-
-    # resize the input image and preprocess it
-    image = image.resize(target)
-    image = img_to_array(image)
-    image = np.expand_dims(image, axis=0)
-    image = imagenet_utils.preprocess_input(image)
-
-    # return the processed image
-    return image
- # image = load('my_file.jpg')
+def load(filename):
+   # np_image = Image.open(filename)
+   np_image = np.array(filename).astype('float32')/224
+   np_image = transform.resize(np_image, (224, 224, 3))
+   np_image = np.expand_dims(np_image, axis=0)
+   return np_image
