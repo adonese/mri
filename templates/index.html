@@ -11,15 +11,20 @@
     <title>Simple Xray analyzer build on deep learning model</title>
   </head>
   <body>
-    <h1>Upload your MRI image here</h1>
+    
 
+    
     <div class="container">
-      <form method="post" action="/predict" enctype="multipart/form-data">
-        <div class="form-group">
-          <input type="file" class="custom-file-input" id="image" name=file>
-          <label class="custom-file-label" for="image">Choose file</label>
+      <h1>Upload your MRI image here</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo eius commodi consectetur error quidem quaerat blanditiis ipsa autem omnis exercitationem eaque praesentium repudiandae ab tempora culpa, voluptatibus, molestiae accusantium sequi?
+      </p>
+      <form class="form-inline" action="/predict" method="post" enctype="multipart/form-data">
+        <div class="form-group mb-2">
+          <label for="staticEmail2" class="sr-only">Upload your Xray image</label>
+          <input type="file" readonly class="form-control-plaintext" id="staticEmail2" name="file">
         </div>
-        <button class="btn btn-primary" type="submit">Submit Xray</button>
+
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
       </form>
     </div>
 
