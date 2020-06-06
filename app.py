@@ -1,5 +1,6 @@
 from flask import Flask
 import flask
+from flask import Response, render_template
 from preprocessing import load
 from PIL import Image
 import numpy as np
@@ -13,7 +14,10 @@ import tensorflow as tf
 xray_model = keras.models.load_model('model.model')
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static")
+
+app.config['UPLOAD_FOLDER'] = "tmp_dir"
+
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -24,15 +28,11 @@ def predict():
 
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
-        if flask.request.files.get("image"):
+        if flask.request.files.get("file"):
             # read the image in PIL format
-            image = flask.request.files["image"].read()
-
-            print(flask.request.files["image"])
-
-
+            image = flask.request.files["file"].read()
+            print(f"The image is: {flask.request.files['file']}")
             image = Image.open(io.BytesIO(image))
-
             # preprocess the image and prepare it for classification
             image_ = load(image)
 
@@ -44,8 +44,15 @@ def predict():
             data["predictions"] = preds.tolist()[0]
 
     # return the data dictionary as a JSON response
-    return flask.jsonify(data)
+    if flask.request.content_type.startswith("application/json"):
+        return flask.jsonify(data)
+    return render_template("result.html", data=data)
 
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 if __name__ == '__main__':
     http_server = WSGIServer(('0.0.0.0', 5010), app)
