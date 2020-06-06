@@ -16,7 +16,13 @@
     
     <div class="container">
       <h1>Upload your MRI image here</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo eius commodi consectetur error quidem quaerat blanditiis ipsa autem omnis exercitationem eaque praesentium repudiandae ab tempora culpa, voluptatibus, molestiae accusantium sequi?
+      <p>
+        PDS is a service to detect pneumonia depending on a deep learning classification model which is built based on more than 5000 X-ray images from Large Dataset of Labeled Optical Coherence Tomography (OCT) and Chest X-Ray Images by Daniel Kermany et.al.
+However pneumonia is a good indicator in the identification of novel coronavirus affected cases.
+
+      </p>
+      <p>
+        This work is built on this paper <a href="https://data.mendeley.com/datasets/rscbjbr9sj/3">view the paper and the dataset</a>. You can also download the model and view the source code at <a href="https://github.com/adonese/mri">the project github repo</a>.
       </p>
       <form class="form-inline" action="/predict" method="post" enctype="multipart/form-data">
         <div class="form-group mb-2">
@@ -26,6 +32,16 @@
 
         <button type="submit" class="btn btn-primary mb-2">Submit</button>
       </form>
+
+      <h3 class="lead">Milestones</h3>
+      <ul class="list-group">
+        <li class="list-group-item">Test it with local data in Sudan (Tracker)</li>
+
+        <li class="list-group-item">Host the project on google cloud engine</li>
+
+        <li class="list-group-item">Compelete this todo with the other todos</li>
+
+      </ul>
     </div>
 
     <!-- Optional JavaScript -->
