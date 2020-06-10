@@ -41,7 +41,13 @@ def predict():
             # model = keras.models.load_model('model.model')
             preds = xray_model.predict(image_)
             data["success"] = True
-            data["predictions"] = preds.tolist()[0]
+
+            preds_list = preds.tolist()[0]
+            preds_list[0] = round(preds_list[0]*100,2)
+            preds_list[1] = round(preds_list[1]*100,2)
+
+            data["predictions"] = preds_list
+            
 
     # return the data dictionary as a JSON response
     if flask.request.content_type.startswith("application/json"):

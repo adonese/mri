@@ -8,15 +8,193 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Simple Xray analyzer build on deep learning model</title>
-  </head>
+ <title>X-ray Pneumonia Detection Service</title>
+   </head>
   <body>
-    <h1>Upload your MRI image here</h1>
+  	<style type="text/css">
+	html,body {
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 3em 2em;
+  font-size: 18px;
+  background: #fff;
+  color: #009966;
+  background-color: #000;
+}
+
+h1,h2,h3 {
+  font-weight: 300;
+  margin: 0.4em 0;
+}
+
+h2 { font-size: 2.5em; font-weight: 700; color: #505050; }
+
+.fw700 {
+  font-weight: 700;
+}
+input {
+  font-size: 100%;
+  background: #fff;
+  border: none;
+  color: #000;
+  padding: 12px;
+  margin: 0 -0.25em 0 0.3em;
+  border-top-left-radius: 9px;
+  border-bottom-left-radius: 9px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5) inset;
+}
+#call {
+  border-top-right-radius: none;
+  border-radius: none;
+}
+::-webkit-input-placeholder {
+   color: #222;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #222;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #222;  
+}
+
+:-ms-input-placeholder {  
+   color: #222;  
+}
+
+.inline {
+  display: inline;
+}
+
+.btn {
+  display: inline-block;
+  background: #009966;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.44em 0.89em 0.39em;
+  margin: 0 1em 0 0;
+  border-top-right-radius: 9px;
+  border-bottom-right-radius: 9px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: 0px;
+  font-size: 1em;
+  box-shadow: none;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-left: none;
+}
+
+.field-wrapper {
+  position:relative;
+  margin-bottom:20px;
+  display: inline-block;
+}
+
+label {
+  position:absolute;
+  bottom:-20px;
+  left:6px;
+  font-size:16px;
+  color:#aaa;
+  transition: all 0.1s linear;
+  opacity:0;
+  font-weight:bold;
+  display: block;
+}
+
+label.on {
+  color: #4481C4;
+}
+
+label.show {
+  bottom: -30px;
+  opacity: 1;
+}
+
+body {
+  /* the following line fixes a blink in chrome https://code.google.com/p/chromium/issues/detail?id=108025 */
+  -webkit-backface-visibility: hidden;
+}
+</style>   
+
+
+
+
+
+
+
+  	
+
+
 
     <div class="container">
-      <p>The result is: {{data}}</p>
+    	<div class="row" >
+    		<div class="col-md-12">
+    			<center>
+    			<img src="../static/images/header.png" height="200px" />
+    				
+    			</center>
+    		</div>
+    		
+    		
+    	</div>
+    	<br />
+    	<br />
+
+
+    	<div class="row"> 
+    		<div class="col-md-3">
+	</div>
+
+    		<div class="col-md-1">
+    			Normal 
+    		</div>
+    		<div class="col-md-1">
+    			{{data['predictions'][0]}} %
+    		</div>
+    		<div class="col-md-5"> 
+    			<div class="progress">
+  <div class="progress-bar bg-success" role="progressbar" style="width: {{data['predictions'][0]}}%" aria-valuenow="{{data['predictions'][0]}}" aria-valuemin="0" aria-valuemax="100"></div><div class="col-md-2">
+	</div>
+
+    		</div>
+
+
+</div>
+</div>
+
+	<div class="row"> 
+		<div class="col-md-3">
+	</div>
+    		<div class="col-md-1">
+    			Pneumonia 
+    		</div>
+    		<div class="col-md-1">
+    			{{data['predictions'][1]}} %
+    		</div>
+    		<div class="col-md-5"> 
+    			<div class="progress">
+  <div class="progress-bar bg-danger" role="progressbar" style="width: {{data['predictions'][1]}}%" aria-valuenow="{{data['predictions'][1]}}" aria-valuemin="0" aria-valuemax="100"></div>
+
+    		</div>
+
+
+</div>
+<div class="col-md-2">
+	</div>
+</div>
+<div class="row">
+
+<a href="/" > Back To the Main Page </a>
+
+</div>
+
+      <!--<p>The result is: {{data}}</p>-->
+
 
     </div>
+   
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
